@@ -14,11 +14,24 @@
 		B56386611DB96A5E00A0598C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B563865E1DB96A5E00A0598C /* main.m */; };
 		B56386671DB9994300A0598C /* EXSDKVersions.plist in Resources */ = {isa = PBXBuildFile; fileRef = B56386661DB9994300A0598C /* EXSDKVersions.plist */; };
 		B56AC1081E417996005C22D6 /* kernel-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B56AC1071E417996005C22D6 /* kernel-manifest.json */; };
+		CDE1B47164BD40B79C6F013A /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 468C66D4AD7A44D1B936E4BD /* libBleManager.a */; };
 		EBB8117C1BFA0514F79CAF74 /* libPods-domopets-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-domopets-app.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		428D54791ECC852A002163B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AC857ED584C4E0796948193 /* BleManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BleManager;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2C1548D9E4CB1AEFA5CCAE6D /* Pods-domopets-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-domopets-app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-domopets-app/Pods-domopets-app.debug.xcconfig"; sourceTree = "<group>"; };
+		468C66D4AD7A44D1B936E4BD /* libBleManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBleManager.a; sourceTree = "<group>"; };
+		4AC857ED584C4E0796948193 /* BleManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BleManager.xcodeproj; path = "../node_modules/react-native-ble-manager/ios/BleManager.xcodeproj"; sourceTree = "<group>"; };
 		A47FE4D7F70906B7DC8CE39B /* Pods-domopets-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-domopets-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-domopets-app/Pods-domopets-app.release.xcconfig"; sourceTree = "<group>"; };
 		B501732A1DC01252003445D9 /* EXShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXShell.plist; sourceTree = "<group>"; };
 		B56386411DB9693800A0598C /* domopets-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "domopets-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,18 +52,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB8117C1BFA0514F79CAF74 /* libPods-domopets-app.a in Frameworks */,
+				CDE1B47164BD40B79C6F013A /* libBleManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13BBCB3D9726477EA212890A /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4AC857ED584C4E0796948193 /* BleManager.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				C4A88D15726AD99E8A257BC7 /* libPods-domopets-app.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		428D54761ECC852A002163B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				428D547A1ECC852A002163B7 /* libBleManager.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5B29BC350A332C58878A9F13 /* Pods */ = {
@@ -69,6 +99,7 @@
 				B56386421DB9693800A0598C /* Products */,
 				5B29BC350A332C58878A9F13 /* Pods */,
 				1A42804E64B7E9E0AB8B6799 /* Frameworks */,
+				13BBCB3D9726477EA212890A /* Libraries */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,7 +165,7 @@
 		B56386391DB9693800A0598C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 810;
 				ORGANIZATIONNAME = "650 Industries, Inc.";
 				TargetAttributes = {
 					B56386401DB9693800A0598C = {
@@ -155,12 +186,28 @@
 			mainGroup = B56386381DB9693800A0598C;
 			productRefGroup = B56386421DB9693800A0598C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 428D54761ECC852A002163B7 /* Products */;
+					ProjectRef = 4AC857ED584C4E0796948193 /* BleManager.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B56386401DB9693800A0598C /* domopets-app */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		428D547A1ECC852A002163B7 /* libBleManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBleManager.a;
+			remoteRef = 428D54791ECC852A002163B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B563863F1DB9693800A0598C /* Resources */ = {
@@ -350,6 +397,10 @@
 				DEVELOPMENT_TEAM = 9C326GREH3;
 				INFOPLIST_FILE = "$(SRCROOT)/domopets-app/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.getexponent.domopets-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -363,6 +414,10 @@
 				DEVELOPMENT_TEAM = 9C326GREH3;
 				INFOPLIST_FILE = "$(SRCROOT)/domopets-app/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.getexponent.domopets-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
