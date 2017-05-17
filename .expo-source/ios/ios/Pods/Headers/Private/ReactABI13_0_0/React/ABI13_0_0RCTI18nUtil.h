@@ -1,0 +1,1 @@
+../../../../../versioned-react-native/ABI13_0_0/React/Modules/ABI13_0_0RCTI18nUtil.h

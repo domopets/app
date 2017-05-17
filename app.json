@@ -1,6 +1,21 @@
 {
   "expo": {
     "sdkVersion": "16.0.0",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "club.domopets.domopets-app"
+    },
+    "android": {
+      "package": "club.domopets.domopets-app"
+    },
+    "name": "domopets-app",
+    "slug": "domopets-app",
+    "version": "0.1.0",
+    "isDetached": true,
+    "detach": {
+      "scheme": "expa036149364094f7ebe41bcb0656680bd",
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v1.15.2-sdk16.0.0-d4906e90-8f62-4e0e-ba43-3362b987c24c.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.15.1-sdk16.0.0-2448b7f4-9b6a-4fd0-906d-8bd7da336bd7.tar.gz"
+    }
   }
 }

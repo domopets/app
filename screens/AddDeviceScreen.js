@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from 'react-native'
 
 export default class AddDeviceScreen extends Component {
@@ -15,9 +16,24 @@ export default class AddDeviceScreen extends Component {
 
   render() {
     return (
-    <View>
+    <View style={styles.view}>
+      <ActivityIndicator
+        style={styles.spinner}
+        size='large'
+      />
       <Text>Scanning for devices...</Text>
     </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  view: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  spinner: {
+    marginBottom: 10,
+  }
+})

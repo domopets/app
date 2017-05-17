@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI12_0_0/Exponent/Modules/Api/GL/ABI12_0_0EXGLViewManager.h

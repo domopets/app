@@ -1,0 +1,1 @@
+../../../../versioned-react-native/ABI12_0_0/Libraries/CameraRoll/ABI12_0_0RCTPhotoLibraryImageLoader.h

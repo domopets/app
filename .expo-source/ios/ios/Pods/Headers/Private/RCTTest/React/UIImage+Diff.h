@@ -1,0 +1,1 @@
+../../../../RCTTest/Libraries/RCTTest/FBSnapshotTestCase/UIImage+Diff.h
