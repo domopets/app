@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@expo/ex-navigation": "^2.11.2",
+    "base64-js": "^1.2.0",
     "expo": "^16.0.0",
     "react": "16.0.0-alpha.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-16.0.0.tar.gz",

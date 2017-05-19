@@ -10,16 +10,14 @@ import {
 import BleManager from 'react-native-ble-manager'
 import {List, ListItem} from 'react-native-elements'
 
-function keys() {
-  Object.keys(this)
-}
+import Router from '../navigation/Router'
 
 export default class AddDeviceScreen extends Component {
   state = {}
 
   static route = {
     navigationBar: {
-      title: 'Add a device'
+      title: 'Add a device',
     }
   }
 
@@ -38,6 +36,13 @@ export default class AddDeviceScreen extends Component {
 
   componentWillUnmount() {
     this.subscription.remove()
+  }
+
+  chooseWifi(device) {
+    this.props.navigator.push(Router.getRoute(
+      'chooseWifi',
+      {deviceId: device.id}
+    ))
   }
 
   render() {
@@ -59,11 +64,12 @@ export default class AddDeviceScreen extends Component {
         containerStyle={styles.listStyle}
       >
         {
-        devices.map((d) => 
+        devices.map((d) =>
           <ListItem
             title={d.name}
             key={d.id}
             subtitle={d.id}
+            onPress={() => this.chooseWifi(d)}
           />
         )
         }
