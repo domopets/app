@@ -9,6 +9,8 @@ import {
   StackNavigation,
 } from '@expo/ex-navigation'
 
+global.Buffer = require('buffer').Buffer
+
 export default class App extends React.Component {
   render() {
     return (

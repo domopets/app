@@ -8,6 +8,8 @@ import BleManager from 'react-native-ble-manager'
 import {List, ListItem} from 'react-native-elements'
 import base64 from 'base64-js'
 
+import Router from '../navigation/Router'
+
 export default class ChooseWifiScreen extends Component {
   state = {}
 
@@ -29,7 +31,7 @@ export default class ChooseWifiScreen extends Component {
 
   async setIndex(index) {
     const data = base64.fromByteArray([index])
-    await BleManager.write(this.props.deviceId, 'AA00', 'AA01', data)
+    await BleManager.write(this.props.deviceId, 'AA00', 'AA01', data, 512)
   }
 
   async getSsid() {
@@ -52,6 +54,13 @@ export default class ChooseWifiScreen extends Component {
     await BleManager.disconnect(this.props.deviceId)
   }
 
+  connectWifi(ssid) {
+    this.props.navigator.push(Router.getRoute('connectWifi', {
+      ssid,
+      deviceId: this.props.deviceId,
+    }))
+  }
+
   render() {
     const wifis = Object.values(this.state)
     return (
@@ -64,6 +73,7 @@ export default class ChooseWifiScreen extends Component {
               <ListItem
                 title={w.ssid}
                 key={i}
+                onPress={() => this.connectWifi(w.ssid)}
               />
             )
           }
