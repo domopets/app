@@ -1,62 +1,18 @@
-import Expo from 'expo'
-import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native'
-import { withNavigation } from '@expo/ex-navigation'
-import { Ionicons } from '@expo/vector-icons'
+import React, {Component} from "react"
+import glamorous, {Text} from "glamorous-native"
 
-import Router from '../navigation/Router'
-
-const AddButton = withNavigation(({navigator}) => (
-  <TouchableOpacity
-    style={styles.buttonContainer}
-    onPress={() => navigator.push(Router.getRoute('addDevice'))}
-  >
-    <Ionicons
-      name="ios-add"
-      size={40}
-      color="white"
-      style={styles.addButton}
-    />
-  </TouchableOpacity>
-))
+const CenteredView = glamorous.view({
+  alignItems: "center",
+  justifyContent: "center",
+  flex: 1,
+})
 
 export default class HomeScreen extends Component {
-  static route = {
-    navigationBar: {
-      title: 'DomoPets',
-      backgroundColor: '#81d580',
-      tintColor: '#fff',
-      renderRight: () => <AddButton/>,
-    }
-  }
-
   render() {
     return (
-      <View style={styles.text}>
+      <CenteredView>
         <Text>😢 You don't have any devices yet...</Text>
-      </View>
+      </CenteredView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addButton: {
-    marginRight: 14,
-  }
-})

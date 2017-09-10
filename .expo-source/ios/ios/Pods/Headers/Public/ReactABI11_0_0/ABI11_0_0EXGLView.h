@@ -1,1 +1,0 @@
-../../../../versioned-react-native/ABI11_0_0/Exponent/Modules/Api/GL/ABI11_0_0EXGLView.h
