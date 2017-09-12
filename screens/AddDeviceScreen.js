@@ -34,12 +34,15 @@ export default class AddDeviceScreen extends Component {
       this.handleBleDevice.bind(this),
     )
     await BleManager.start()
-    console.log("here")
     await BleManager.scan(["aa00"], 5, true)
   }
 
   componentWillUnmount() {
     this.subscription.remove()
+  }
+
+  chooseWifi(device) {
+    this.props.navigation.navigate("ChooseWifi", {deviceId: device.id})
   }
 
   render() {
@@ -54,7 +57,7 @@ export default class AddDeviceScreen extends Component {
     }
 
     return (
-      <List>
+      <List containerStyle={{marginTop: 0}}>
         {devices.map(d =>
           <ListItem
             title={d.name}
