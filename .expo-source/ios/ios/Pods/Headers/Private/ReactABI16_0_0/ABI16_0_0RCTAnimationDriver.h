@@ -1,1 +1,0 @@
-../../../../versioned-react-native/ABI16_0_0/Libraries/NativeAnimation/Drivers/ABI16_0_0RCTAnimationDriver.h

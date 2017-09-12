@@ -1,1 +1,0 @@
-../../../../../versioned-react-native/ABI14_0_0/Libraries/Image/ABI14_0_0RCTImageCache.h

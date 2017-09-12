@@ -1,1 +1,0 @@
-../../../../../versioned-react-native/ABI14_0_0/Exponent/Modules/Api/Components/Lottie/ABI14_0_0EXAnimationViewManager.h

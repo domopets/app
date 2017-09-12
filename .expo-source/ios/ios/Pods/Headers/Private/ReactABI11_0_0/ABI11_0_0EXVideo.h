@@ -1,1 +1,0 @@
-../../../../versioned-react-native/ABI11_0_0/Exponent/Modules/Api/Components/Video/ABI11_0_0EXVideo.h

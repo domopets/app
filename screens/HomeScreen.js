@@ -1,62 +1,60 @@
-import Expo from 'expo'
-import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity
-} from 'react-native'
-import { withNavigation } from '@expo/ex-navigation'
-import { Ionicons } from '@expo/vector-icons'
+import React, {Component} from "react"
+import glamorous, {Text} from "glamorous-native"
+import {Icon} from "react-native-elements"
+import CenteredView from "../components/CenteredView"
+import {List, ListItem} from "react-native-elements"
 
-import Router from '../navigation/Router'
-
-const AddButton = withNavigation(({navigator}) => (
-  <TouchableOpacity
-    style={styles.buttonContainer}
-    onPress={() => navigator.push(Router.getRoute('addDevice'))}
-  >
-    <Ionicons
-      name="ios-add"
-      size={40}
-      color="white"
-      style={styles.addButton}
-    />
-  </TouchableOpacity>
-))
+const AddButton = props =>
+  <Icon name="ios-add" type="ionicon" color="white" size={30} {...props} />
 
 export default class HomeScreen extends Component {
-  static route = {
-    navigationBar: {
-      title: 'DomoPets',
-      backgroundColor: '#81d580',
-      tintColor: '#fff',
-      renderRight: () => <AddButton/>,
-    }
+  static navigationOptions = ({navigation}) => ({
+    title: "Domopets",
+    headerBackTitle: "Back",
+    headerStyle: {
+      backgroundColor: "#81d580",
+      paddingHorizontal: 10,
+    },
+    headerTintColor: "white",
+    headerRight: <AddButton onPress={() => navigation.navigate("AddDevice")} />,
+  })
+
+  state = {
+    devices: [
+      /*
+      {
+        name: "Water Dispenser",
+        icon: {
+          type: "simple-line-icon",
+          name: "drop",
+        },
+        component: "WaterDispenser",
+      }, */
+    ],
   }
 
   render() {
+    if (this.state.devices.length === 0) {
+      return (
+        <CenteredView>
+          <Text>😢 You don't have any devices yet...</Text>
+        </CenteredView>
+      )
+    }
+
+    const {navigate} = this.props.navigation
+
     return (
-      <View style={styles.text}>
-        <Text>😢 You don't have any devices yet...</Text>
-      </View>
+      <List>
+        {this.state.devices.map(d =>
+          <ListItem
+            key={d.name}
+            title={d.name}
+            leftIcon={d.icon}
+            onPress={() => navigate(d.component)}
+          />,
+        )}
+      </List>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  text: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addButton: {
-    marginRight: 14,
-  }
-})

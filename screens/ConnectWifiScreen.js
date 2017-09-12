@@ -1,45 +1,37 @@
-import Expo from 'expo'
-import React, {Component} from 'react'
-import {
-  View,
-  StyleSheet,
-  Alert,
-} from 'react-native'
-import {
-  Text,
-  FormLabel,
-  FormInput,
-  Button,
-} from 'react-native-elements'
-import BleManager from 'react-native-ble-manager'
-import btoa from 'btoa'
+import React, {Component} from "react"
+import {View, StyleSheet, Alert} from "react-native"
+import {Text, FormLabel, FormInput, Button} from "react-native-elements"
+import btoa from "btoa"
+import {setSsid, setPassword} from "../ble"
 
 export default class ConnectWifiScreen extends Component {
   state = {
-    password: '',
-    loading: false
+    password: "",
+    loading: false,
   }
 
-  static route = {
-    navigationBar: {
-      title: 'Connect to Wifi...',
-    }
+  static navigationOptions = {
+    title: "Connect to Wifi...",
   }
 
   async connect() {
-    const ssid = btoa(this.props.ssid)
+    const ssid = btoa(this.ssid)
     const password = btoa(this.state.password)
 
-    await BleManager.write(this.props.deviceId, 'BB00', 'BB01', ssid, 512)
+    await setSsid(ssid)
 
     try {
-      await BleManager.write(this.props.deviceId, 'BB00', 'BB02', password, 512)
+      await setPassword(password)
     } catch (e) {
-      Alert.alert('Error', 'Invalid Password')
+      Alert.alert("Error", "Invalid Password")
       return this.setState({loading: false})
     }
 
     this.props.navigator.popToTop()
+  }
+
+  get ssid() {
+    return this.props.navigation.state.params.ssid
   }
 
   render() {
@@ -47,7 +39,7 @@ export default class ConnectWifiScreen extends Component {
       <View style={styles.view}>
         <FormLabel>Ssid</FormLabel>
         <Text style={styles.text}>
-          {this.props.ssid}
+          {this.ssid}
         </Text>
         <FormLabel>Password</FormLabel>
         <FormInput
@@ -72,5 +64,5 @@ const styles = StyleSheet.create({
   },
   text: {
     marginHorizontal: 20,
-  }
+  },
 })
