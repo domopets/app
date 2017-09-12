@@ -22,7 +22,7 @@ export default class HomeScreen extends Component {
   state = {
     devices: [
       {
-        name: "Distribution Eau",
+        name: "Water Dispenser",
         icon: {
           type: "simple-line-icon",
           name: "drop",

@@ -33,14 +33,19 @@ export default class ChooseWifiScreen extends Component {
   }
 
   async componentDidMount() {
-    this.deviceId = this.props.navigation.state.params.deviceId
-    await BleManager.connect(this.deviceId)
-    const count = await this.getCount()
-    for (const i = 0; i < count; i++) {
-      await this.setIndex(i)
-      const ssid = await this.getSsid()
-      this.setState({[i]: {ssid}})
-    }
+    // this.deviceId = this.props.navigation.state.params.deviceId
+    // await BleManager.connect(this.deviceId)
+    // const count = await this.getCount()
+    // for (const i = 0; i < count; i++) {
+    //   await this.setIndex(i)
+    //   const ssid = await this.getSsid()
+    //   this.setState({[i]: {ssid}})
+    // }
+    this.setState({
+      "1": {ssid: "Bbox-A7B33E4F"},
+      "2": {ssid: "Bbox-E992F45C"},
+      "3": {ssid: "Free Wifi"},
+    })
   }
 
   async componentWillUnmount() {

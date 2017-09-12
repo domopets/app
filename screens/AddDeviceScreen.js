@@ -18,7 +18,12 @@ const BleManagerModule = NativeModules.BleManager
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule)
 
 export default class AddDeviceScreen extends Component {
-  state = {}
+  state = {
+    "424224": {
+      id: "424224",
+      name: "Water Dispenser",
+    },
+  }
 
   static navigationOptions = {
     title: "Add a device",
