@@ -21,6 +21,7 @@ export default class HomeScreen extends Component {
 
   state = {
     devices: [
+      /*
       {
         name: "Water Dispenser",
         icon: {
@@ -28,12 +29,12 @@ export default class HomeScreen extends Component {
           name: "drop",
         },
         component: "WaterDispenser",
-      },
+      }, */
     ],
   }
 
   render() {
-    if (this.state.devices === 0) {
+    if (this.state.devices.length === 0) {
       return (
         <CenteredView>
           <Text>😢 You don't have any devices yet...</Text>

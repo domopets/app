@@ -1,29 +1,17 @@
 import React, {Component} from "react"
-import {
-  ActivityIndicator,
-  NativeEventEmitter,
-  NativeModules,
-} from "react-native"
+import {ActivityIndicator} from "react-native"
 import glamorous, {Text} from "glamorous-native"
-import BleManager from "react-native-ble-manager"
 import {List, ListItem} from "react-native-elements"
 
 import CenteredView from "../components/CenteredView"
+import {getDevices} from "../ble"
 
 const Spinner = glamorous(ActivityIndicator)({
   marginBottom: 10,
 })
 
-const BleManagerModule = NativeModules.BleManager
-const bleManagerEmitter = new NativeEventEmitter(BleManagerModule)
-
 export default class AddDeviceScreen extends Component {
-  state = {
-    "424224": {
-      id: "424224",
-      name: "Water Dispenser",
-    },
-  }
+  state = {}
 
   static navigationOptions = {
     title: "Add a device",
@@ -34,16 +22,9 @@ export default class AddDeviceScreen extends Component {
   }
 
   async componentDidMount() {
-    this.subscription = bleManagerEmitter.addListener(
-      "BleManagerDiscoverPeripheral",
-      this.handleBleDevice.bind(this),
-    )
-    await BleManager.start()
-    await BleManager.scan(["aa00"], 5, true)
-  }
-
-  componentWillUnmount() {
-    this.subscription.remove()
+    const devices = await getDevices()
+    console.log(devices)
+    this.setState(devices)
   }
 
   chooseWifi(device) {

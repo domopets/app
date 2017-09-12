@@ -988,6 +988,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
+btoa@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/btoa/-/btoa-1.1.2.tgz#3e40b81663f81d2dd6596a4cb714a8dc16cfabe0"
+
 buffer@^5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.0.7.tgz#570a290b625cf2603290c1149223d27ccf04db97"
@@ -3530,9 +3534,9 @@ react-devtools-core@^2.5.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-native-ble-manager@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-ble-manager/-/react-native-ble-manager-6.1.0.tgz#2fd8ae828309086b962135d9902f4e287f224c73"
+react-native-ble-manager@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-ble-manager/-/react-native-ble-manager-3.3.0.tgz#383ef3350f861c1124bb1366280f54afa8c4018f"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
