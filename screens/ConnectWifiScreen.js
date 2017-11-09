@@ -3,6 +3,7 @@ import {View, StyleSheet, Alert} from "react-native"
 import {Text, FormLabel, FormInput, Button} from "react-native-elements"
 import btoa from "btoa"
 import {setSsid, setPassword} from "../ble"
+import {NavigationActions} from "react-navigation"
 
 export default class ConnectWifiScreen extends Component {
   state = {
@@ -11,7 +12,7 @@ export default class ConnectWifiScreen extends Component {
   }
 
   static navigationOptions = {
-    title: "Connect to Wifi...",
+    title: "Connect to Wifi",
   }
 
   async connect() {
@@ -27,7 +28,12 @@ export default class ConnectWifiScreen extends Component {
       return this.setState({loading: false})
     }
 
-    this.props.navigator.popToTop()
+    this.props.navigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({routeName: "Home"})],
+      }),
+    )
   }
 
   get ssid() {

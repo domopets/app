@@ -3,6 +3,9 @@ import glamorous, {Text} from "glamorous-native"
 import {Icon} from "react-native-elements"
 import CenteredView from "../components/CenteredView"
 import {List, ListItem} from "react-native-elements"
+import Zeroconf from "react-native-zeroconf"
+
+const zeroconf = new Zeroconf()
 
 const AddButton = props =>
   <Icon name="ios-add" type="ionicon" color="white" size={30} {...props} />
@@ -20,17 +23,39 @@ export default class HomeScreen extends Component {
   })
 
   state = {
-    devices: [
-      /*
-      {
-        name: "Water Dispenser",
-        icon: {
-          type: "simple-line-icon",
-          name: "drop",
-        },
-        component: "WaterDispenser",
-      }, */
-    ],
+    devices: [],
+  }
+
+  serviceFound(service) {
+    const {devices} = this.state
+    switch (service.name) {
+      case "DOMOPETS_WaterDispenser": {
+        let url = `${service.addresses[0]}:${service.port}`
+        this.setState({
+          devices: [
+            ...devices,
+            {
+              name: "Water Dispenser",
+              icon: {
+                type: "simple-line-icon",
+                name: "drop",
+              },
+              component: "WaterDispenser",
+              url,
+            },
+          ],
+        })
+      }
+    }
+  }
+
+  componentWillMount() {
+    zeroconf.scan()
+    zeroconf.on("resolved", this.serviceFound.bind(this))
+  }
+
+  componentWillUnmoun() {
+    zeroconf.stop()
   }
 
   render() {
@@ -51,7 +76,7 @@ export default class HomeScreen extends Component {
             key={d.name}
             title={d.name}
             leftIcon={d.icon}
-            onPress={() => navigate(d.component)}
+            onPress={() => navigate(d.component, {url: d.url})}
           />,
         )}
       </List>
