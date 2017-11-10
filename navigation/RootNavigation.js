@@ -5,6 +5,7 @@ import AddDeviceScreen from "../screens/AddDeviceScreen"
 import ChooseWifiScreen from "../screens/ChooseWifiScreen"
 import ConnectWifiScreen from "../screens/ConnectWifiScreen"
 import WaterDispenserScreen from "../screens/WaterDispenserScreen"
+import FoodDispenserScreen from "../screens/FoodDispenserScreen"
 
 export default StackNavigator({
   Home: {screen: HomeScreen},
@@ -12,4 +13,5 @@ export default StackNavigator({
   ChooseWifi: {screen: ChooseWifiScreen},
   ConnectWifi: {screen: ConnectWifiScreen},
   WaterDispenser: {screen: WaterDispenserScreen},
+  FoodDispenser: {screen: FoodDispenserScreen},
 })

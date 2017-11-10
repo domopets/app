@@ -29,6 +29,24 @@ export default class HomeScreen extends Component {
   serviceFound(service) {
     const {devices} = this.state
     switch (service.name) {
+      case "DOMOPETS_FoodDispenser": {
+        let url = `${service.addresses[0]}:${service.port}`
+        this.setState({
+          devices: [
+            ...devices,
+            {
+              name: "Food Dispenser",
+              icon: {
+                type: "material-community",
+                name: "silverware-variant",
+              },
+              component: "FoodDispenser",
+              url,
+            },
+          ],
+        })
+        break
+      }
       case "DOMOPETS_WaterDispenser": {
         let url = `${service.addresses[0]}:${service.port}`
         this.setState({
@@ -45,6 +63,7 @@ export default class HomeScreen extends Component {
             },
           ],
         })
+        break
       }
     }
   }

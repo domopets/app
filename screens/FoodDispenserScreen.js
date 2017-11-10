@@ -14,26 +14,35 @@ const WeightText = glamorous.text({
 
 export default class WaterDispenser extends Component {
   state = {
-    cl: 0,
+    g: 0,
   }
 
   static navigationOptions = {
-    title: "Water Dispenser",
+    title: "Food Dispenser",
   }
 
   get url() {
     return this.props.navigation.state.params.url
   }
 
+  tare() {
+    this.socket.emit("tare")
+  }
+
+  dispenseFood() {
+    this.socket.emit("dispenseFood")
+  }
+
   componentWillMount() {
     this.socket = io(this.url)
     this.socket.on("measure", d => {
+      console.log("measure")
       console.log(d)
       const value = parseInt(d)
       if (value < 0) {
-        this.setState({cl: 0})
+        this.setState({g: 0})
       } else {
-        this.setState({cl: value / 10})
+        this.setState({g: value})
       }
     })
   }
@@ -46,20 +55,17 @@ export default class WaterDispenser extends Component {
     return (
       <MainView>
         <WeightText>
-          {this.state.cl} cL
+          {this.state.g} g
         </WeightText>
         <View>
           <Button
-            title="Dispense Water"
+            title="Dispense Food"
             backgroundColor="#325f96"
             borderRadius={50}
             buttonStyle={{marginBottom: 30}}
+            onPress={() => this.dispenseFood()}
           />
-          <Button
-            title="Tare"
-            borderRadius={50}
-            onPress={() => this.socket.emit("tare")}
-          />
+          <Button title="Tare" borderRadius={50} onPress={() => this.tare()} />
         </View>
       </MainView>
     )
