@@ -28,9 +28,10 @@ export default class HomeScreen extends Component {
 
   serviceFound(service) {
     const {devices} = this.state
+    console.log(service)
     switch (service.name) {
       case "DOMOPETS_FoodDispenser": {
-        let url = `${service.addresses[0]}:${service.port}`
+        let url = service.txt.url
         this.setState({
           devices: [
             ...devices,
