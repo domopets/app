@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import glamorous, {View} from "glamorous-native"
 import {Button} from "react-native-elements"
+import io from "socket.io-client"
 import {connect} from "react-redux"
 import socket from "../socket"
 
@@ -13,9 +14,9 @@ const WeightText = glamorous.text({
   textAlign: "center",
 })
 
-class FoodDispenser extends Component {
+class Litter extends Component {
   static navigationOptions = {
-    title: "Food Dispenser",
+    title: "Litter",
   }
 
   get id() {
@@ -34,32 +35,18 @@ class FoodDispenser extends Component {
     })
   }
 
-  dispenseFood() {
-    socket.emit("dispatch", {
-      action: "dispenseFood",
-      id: this.id,
-    })
-  }
-
   render() {
-    console.log(this.props)
     return (
       <MainView>
         <WeightText>
           {this.weight} g
         </WeightText>
         <View>
-          <Button
-            title="Dispense Food"
-            backgroundColor="#325f96"
-            borderRadius={50}
-            buttonStyle={{marginBottom: 30}}
-            onPress={() => this.dispenseFood()}
-          />
           <Button title="Tare" borderRadius={50} onPress={() => this.tare()} />
         </View>
       </MainView>
     )
   }
 }
-export default connect(state => ({modules: state}))(FoodDispenser)
+
+export default connect(state => ({modules: state}))(Litter)

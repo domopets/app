@@ -7,6 +7,7 @@ import ConnectWifiScreen from "../screens/ConnectWifiScreen"
 import WaterDispenserScreen from "../screens/WaterDispenserScreen"
 import LaserControllerScreen from "../screens/LaserControllerScreen"
 import FoodDispenserScreen from "../screens/FoodDispenserScreen"
+import LitterScreen from "../screens/LitterScreen"
 
 export default StackNavigator({
   Home: {screen: HomeScreen},
@@ -14,6 +15,7 @@ export default StackNavigator({
   ChooseWifi: {screen: ChooseWifiScreen},
   ConnectWifi: {screen: ConnectWifiScreen},
   WaterDispenser: {screen: WaterDispenserScreen},
+  Litter: {screen: LitterScreen},
   FoodDispenser: {screen: FoodDispenserScreen},
   LaserController: {screen: LaserControllerScreen},
 })

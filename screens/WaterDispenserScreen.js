@@ -2,6 +2,8 @@ import React, {Component} from "react"
 import glamorous, {View} from "glamorous-native"
 import {Button} from "react-native-elements"
 import io from "socket.io-client"
+import {connect} from "react-redux"
+import socket from "../socket"
 
 const MainView = glamorous.view({
   flex: 1,
@@ -12,41 +14,39 @@ const WeightText = glamorous.text({
   textAlign: "center",
 })
 
-export default class WaterDispenser extends Component {
-  state = {
-    cl: 0,
-  }
-
+class WaterDispenser extends Component {
   static navigationOptions = {
     title: "Water Dispenser",
   }
 
-  get url() {
-    return this.props.navigation.state.params.url
+  get id() {
+    return this.props.navigation.state.params.id
   }
 
-  componentWillMount() {
-    this.socket = io(this.url)
-    this.socket.on("measure", d => {
-      console.log(d)
-      const value = parseInt(d)
-      if (value < 0) {
-        this.setState({cl: 0})
-      } else {
-        this.setState({cl: value / 10})
-      }
+  get weight() {
+    const weight = this.props.modules[this.id].weight
+    return weight < 0 ? 0 : weight
+  }
+
+  tare() {
+    socket.emit("dispatch", {
+      action: "tare",
+      id: this.id,
     })
   }
 
-  componentWillUnmount() {
-    this.socket.disconnect()
+  dispenseWater() {
+    socket.emit("dispatch", {
+      action: "dispenseWater",
+      id: this.id,
+    })
   }
 
   render() {
     return (
       <MainView>
         <WeightText>
-          {this.state.cl} cL
+          {this.weight} g
         </WeightText>
         <View>
           <Button
@@ -54,14 +54,13 @@ export default class WaterDispenser extends Component {
             backgroundColor="#325f96"
             borderRadius={50}
             buttonStyle={{marginBottom: 30}}
+            onPress={() => this.dispenseWater()}
           />
-          <Button
-            title="Tare"
-            borderRadius={50}
-            onPress={() => this.socket.emit("tare")}
-          />
+          <Button title="Tare" borderRadius={50} onPress={() => this.tare()} />
         </View>
       </MainView>
     )
   }
 }
+
+export default connect(state => ({modules: state}))(WaterDispenser)

@@ -5,8 +5,7 @@ import RootNavigation from "./navigation/RootNavigation"
 import {Provider} from "react-redux"
 import {createStore} from "redux"
 import redux from "./redux"
-
-import io from "socket.io-client"
+import socket from "./socket"
 
 const store = createStore(redux)
 
@@ -42,6 +41,21 @@ function moduleFound(module) {
       })
       break
     }
+    case "LITTER": {
+      store.dispatch({
+        type: "SET_MODULE",
+        payload: {
+          name: "Litter",
+          icon: {
+            type: "simple-line-icon",
+            name: "drop",
+          },
+          component: "Litter",
+          id: module.id,
+        },
+      })
+      break
+    }
     case "LASER": {
       store.dispatch({
         type: "SET_MODULE",
@@ -60,9 +74,6 @@ function moduleFound(module) {
   }
 }
 
-const socket = io("http://192.168.1.11:3000", {
-  transports: ["websocket"],
-})
 socket.on("connect", () => {
   socket.emit("type", "MOBILE")
 })
@@ -77,6 +88,12 @@ socket.on("dispatch", data => {
       })
       break
   }
+})
+socket.on("leave", id => {
+  store.dispatch({
+    type: "DELETE_MODULE",
+    payload: id,
+  })
 })
 
 const Root = () =>

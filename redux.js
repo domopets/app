@@ -5,6 +5,10 @@ export default function reducer(state = {}, action) {
         ...state,
         [action.payload.id]: action.payload,
       }
+    case "DELETE_MODULE":
+      const newState = {...state}
+      delete newState[action.payload]
+      return newState
     default:
       return state
   }

@@ -46,7 +46,7 @@ export default class AddDeviceScreen extends Component {
       <List containerStyle={{marginTop: 0}}>
         {devices.map(d =>
           <ListItem
-            title={d.name}
+            title={d.advertising.kCBAdvDataLocalName}
             key={d.id}
             subtitle={d.id}
             onPress={() => this.chooseWifi(d)}
