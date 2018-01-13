@@ -1,26 +1,23 @@
 import React, {Component} from "react"
-import { StyleSheet, View, WebView, ScrollView, Dimensions } from 'react-native';
-import HTML from 'react-native-render-html';
+import {StyleSheet, View, WebView, ScrollView, Dimensions} from "react-native"
+import HTML from "react-native-render-html"
 import glamorous, {Text} from "glamorous-native"
 import {Icon} from "react-native-elements"
 import CenteredView from "../components/CenteredView"
 import {List, ListItem} from "react-native-elements"
-import Zeroconf from "react-native-zeroconf"
-import WebRTC from 'react-native-webrtc';
+import {connect} from "react-redux"
 
-  var styles = StyleSheet.create({
+var styles = StyleSheet.create({
   backgroundVideo: {
-    width:400,
-    height:322
-  }
-  })
-
-const zeroconf = new Zeroconf()
+    width: 400,
+    height: 322,
+  },
+})
 
 const AddButton = props =>
   <Icon name="ios-add" type="ionicon" color="white" size={30} {...props} />
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => ({
     title: "Domopets",
     headerBackTitle: "Back",
@@ -33,89 +30,14 @@ export default class HomeScreen extends Component {
   })
 
   state = {
-    devices: [],
-  }
-
-  serviceFound(service) {
-    const {devices} = this.state
-    console.log(service)
-    switch (service.name) {
-      case "DOMOPETS_FoodDispenser": {
-        let url = service.txt.url
-        this.setState({
-          devices: [
-            ...devices,
-            {
-              name: "Food Dispenser",
-              icon: {
-                type: "material-community",
-                name: "silverware-variant",
-              },
-              component: "FoodDispenser",
-              url,
-            },
-          ],
-        })
-        break
-      }
-      case "DOMOPETS_WaterDispenser": {
-        let url = `${service.addresses[0]}:${service.port}`
-        this.setState({
-          devices: [
-            ...devices,
-            {
-              name: "Water Dispenser",
-              icon: {
-                type: "simple-line-icon",
-                name: "drop",
-              },
-              component: "WaterDispenser",
-              url,
-            },
-          ],
-        })
-        break
-      }
-      case "DOMOPETS_LaserController": {
-        let url = service.txt.url
-        this.setState({
-          devices: [
-            ...devices,
-            {
-              name: "Laser Control",
-              icon: {
-                type: "material-community",
-                name: "silverware-variant",
-              },
-              component: "LaserController",
-              url,
-            },
-          ],
-        })
-        break
-      }
-    }
-  }
-
-  componentWillMount() {
-    zeroconf.scan()
-    zeroconf.on("resolved", this.serviceFound.bind(this))
-  }
-  
-  componentWillUnmount() {
-    zeroconf.stop()
-  }
-
-   formatHtml () {
-    return ('<html><body><img src="' + "http://172.20.10.8:8080/stream/video.mjpeg" + '" width="100%" style="background-color: black; min-height: 100%; min-width: 100%; position: fixed; top: 0; left: 0;"></body></html>');
+    modules: {},
   }
 
   render() {
-    if (this.state.devices.length === 0) {
+    if (Object.keys(this.props.modules).length === 0) {
       return (
         <ScrollView>
-         <Text>😢 You don't have any devices yet...</Text>
-        
+          <Text>😢 You don't have any modules yet...</Text>
         </ScrollView>
       )
     }
@@ -124,15 +46,18 @@ export default class HomeScreen extends Component {
 
     return (
       <List>
-        {this.state.devices.map(d =>
-          <ListItem
-            key={d.name}
-            title={d.name}
-            leftIcon={d.icon}
-            onPress={() => navigate(d.component, {url: d.url})}
-          />,
-        )}
+        {Object.values(this.props.modules).map(d => {
+          return (
+            <ListItem
+              key={d.id}
+              title={d.name}
+              onPress={() => navigate(d.component, {id: d.id})}
+            />
+          )
+        })}
       </List>
     )
   }
 }
+
+export default connect(state => ({modules: state}))(HomeScreen)

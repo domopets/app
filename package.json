@@ -19,6 +19,8 @@
     "react-native-webrtc": "^1.58.3",
     "react-native-zeroconf": "^0.8.3",
     "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "socket.io-client": "^2.0.3"
   },
   "devDependencies": {

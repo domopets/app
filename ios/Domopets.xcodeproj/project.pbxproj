@@ -808,11 +808,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 9QDM6T8PYC;
+						DevelopmentTeam = 9C326GREH3;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 9QDM6T8PYC;
+						DevelopmentTeam = 9C326GREH3;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1304,7 +1304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 9QDM6T8PYC;
+				DEVELOPMENT_TEAM = 9C326GREH3;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1338,7 +1338,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 9QDM6T8PYC;
+				DEVELOPMENT_TEAM = 9C326GREH3;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1369,7 +1369,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 9QDM6T8PYC;
+				DEVELOPMENT_TEAM = 9C326GREH3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/ios/**";
 				HEADER_SEARCH_PATHS = (
@@ -1387,7 +1387,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Domopets-lulu";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Domopets-alex";
 				PRODUCT_NAME = Domopets;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1399,7 +1399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 9QDM6T8PYC;
+				DEVELOPMENT_TEAM = 9C326GREH3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-webrtc/ios/**";
 				HEADER_SEARCH_PATHS = (
@@ -1417,7 +1417,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Domopets-lulu";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Domopets-alex";
 				PRODUCT_NAME = Domopets;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

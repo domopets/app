@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import glamorous, {View} from "glamorous-native"
 import {Button} from "react-native-elements"
-import io from "socket.io-client"
+import {connect} from "react-redux"
 
 const MainView = glamorous.view({
   flex: 1,
@@ -12,17 +12,18 @@ const WeightText = glamorous.text({
   textAlign: "center",
 })
 
-export default class WaterDispenser extends Component {
-  state = {
-    g: 0,
-  }
-
+class FoodDispenser extends Component {
   static navigationOptions = {
     title: "Food Dispenser",
   }
 
-  get url() {
-    return this.props.navigation.state.params.url
+  get id() {
+    return this.props.navigation.state.params.id
+  }
+
+  get weight() {
+    const weight = this.props.modules[this.id].weight
+    return weight < 0 ? 0 : weight
   }
 
   tare() {
@@ -33,29 +34,12 @@ export default class WaterDispenser extends Component {
     this.socket.emit("dispenseFood")
   }
 
-  componentWillMount() {
-    this.socket = io(this.url)
-    this.socket.on("measure", d => {
-      console.log("measure")
-      console.log(d)
-      const value = parseInt(d)
-      if (value < 0) {
-        this.setState({g: 0})
-      } else {
-        this.setState({g: value})
-      }
-    })
-  }
-
-  componentWillUnmount() {
-    this.socket.disconnect()
-  }
-
   render() {
+    console.log(this.props)
     return (
       <MainView>
         <WeightText>
-          {this.state.g} g
+          {this.weight} g
         </WeightText>
         <View>
           <Button
@@ -71,3 +55,4 @@ export default class WaterDispenser extends Component {
     )
   }
 }
+export default connect(state => ({modules: state}))(FoodDispenser)
