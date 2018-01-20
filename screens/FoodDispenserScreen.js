@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import glamorous, {View} from "glamorous-native"
-import {Button, Icon} from "react-native-elements"
+import {Button, Icon, CheckBox} from "react-native-elements"
+import DateTimePicker from "react-native-modal-datetime-picker"
 import {connect} from "react-redux"
 import socket from "../socket"
 
@@ -43,6 +44,19 @@ class FoodDispenser extends Component {
     return weight < 0 ? 0 : weight
   }
 
+  state = {
+    isDateTimePickerVisible: false,
+  }
+
+  _showDateTimePicker = () => this.setState({isDateTimePickerVisible: true})
+
+  _hideDateTimePicker = () => this.setState({isDateTimePickerVisible: false})
+
+  _handleDatePicked = date => {
+    console.log("A date has been picked: ", date)
+    this._hideDateTimePicker()
+  }
+
   tare() {
     socket.emit("dispatch", {
       action: "tare",
@@ -72,8 +86,36 @@ class FoodDispenser extends Component {
             buttonStyle={{marginBottom: 30}}
             onPress={() => this.dispenseFood()}
           />
-          <Button title="Tare" borderRadius={50} onPress={() => this.tare()} />
+          <Button
+            title="Tare"
+            borderRadius={50}
+            onPress={() => this.tare()}
+            buttonStyle={{marginBottom: 30}}
+          />
+          <CheckBox
+            title="AutoFeed"
+            checked={this.state.checked}
+            containerStyle={{
+              backgroundColor: "transparent",
+            }}
+            backgroundColor="transparent"
+            onPress={() => this.setState({checked: !this.state.checked})}
+          />
+          <Button
+            title="Schedule"
+            backgroundColor="#81d580"
+            borderRadius={50}
+            onPress={() => this._showDateTimePicker()}
+            disabled={!this.state.checked}
+          />
         </View>
+        <DateTimePicker
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this._handleDatePicked}
+          onCancel={this._hideDateTimePicker}
+          mode="time"
+          is24Hour={true}
+        />
       </MainView>
     )
   }

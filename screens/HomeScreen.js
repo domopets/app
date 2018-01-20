@@ -15,7 +15,14 @@ var styles = StyleSheet.create({
 })
 
 const AddButton = props =>
-  <Icon name="ios-add" type="ionicon" color="white" size={30} {...props} />
+  <Icon
+    name="ios-add"
+    type="ionicon"
+    color="white"
+    size={30}
+    containerStyle={{padding: 10}}
+    {...props}
+  />
 
 class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -23,7 +30,6 @@ class HomeScreen extends Component {
     headerBackTitle: "Back",
     headerStyle: {
       backgroundColor: "#81d580",
-      paddingHorizontal: 10,
     },
     headerTintColor: "white",
     headerRight: <AddButton onPress={() => navigation.navigate("AddDevice")} />,
