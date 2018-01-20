@@ -22,6 +22,7 @@ function moduleFound(module) {
           },
           component: "FoodDispenser",
           id: module.id,
+          type: module.type,
         },
       })
       break
@@ -37,6 +38,7 @@ function moduleFound(module) {
           },
           component: "WaterDispenser",
           id: module.id,
+          type: module.type,
         },
       })
       break
@@ -52,6 +54,7 @@ function moduleFound(module) {
           },
           component: "Litter",
           id: module.id,
+          type: module.type,
         },
       })
       break
@@ -67,6 +70,7 @@ function moduleFound(module) {
           },
           component: "LaserController",
           id: module.id,
+          type: module.type,
         },
       })
       break

@@ -8,6 +8,7 @@ import WaterDispenserScreen from "../screens/WaterDispenserScreen"
 import LaserControllerScreen from "../screens/LaserControllerScreen"
 import FoodDispenserScreen from "../screens/FoodDispenserScreen"
 import LitterScreen from "../screens/LitterScreen"
+import HistogramScreen from "../screens/HistogramScreen"
 
 export default StackNavigator({
   Home: {screen: HomeScreen},
@@ -18,4 +19,5 @@ export default StackNavigator({
   Litter: {screen: LitterScreen},
   FoodDispenser: {screen: FoodDispenserScreen},
   LaserController: {screen: LaserControllerScreen},
+  Histogram: {screen: HistogramScreen},
 })
