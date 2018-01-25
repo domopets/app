@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import glamorous, {View} from "glamorous-native"
-import {Button} from "react-native-elements"
+import {Button, Icon} from "react-native-elements"
 import io from "socket.io-client"
 import {connect} from "react-redux"
 import socket from "../socket"
@@ -14,10 +14,26 @@ const WeightText = glamorous.text({
   textAlign: "center",
 })
 
+const HistogramButton = props =>
+  <Icon
+    type="feather"
+    name="bar-chart"
+    color="#037aff"
+    size={20}
+    containerStyle={{padding: 10}}
+    {...props}
+  />
+
 class Litter extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({navigation}) => ({
     title: "Litter",
-  }
+    headerRight: (
+      <HistogramButton
+        onPress={() =>
+          navigation.navigate("Histogram", {id: navigation.state.params.id})}
+      />
+    ),
+  })
 
   get id() {
     return this.props.navigation.state.params.id

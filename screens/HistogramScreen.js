@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 import {BarChart, AreaChart, XAxis, YAxis} from "react-native-svg-charts"
 import {LinearGradient, Stop} from "react-native-svg"
 import * as shape from "d3-shape"
+import socket from "../socket"
 
 const texts = {
   FOOD: {
@@ -17,7 +18,7 @@ const texts = {
     ten: "Quantités consommées",
   },
   LITTER: {
-    unique: "Votre chat pèse {} kg",
+    unique: "Votre chat pèse {} g",
     week: "Fréquences de vôtre chat dans sa litière",
     ten: "Variation de son poids",
   },
@@ -26,13 +27,15 @@ const texts = {
 const __fakeData__ = {
   unique: 4,
   week: [6, 7, 5, 3, 7, 9, 10],
-  ten: [20, 35, 22, 16, 21, 32, 9, 29, 22, 31],
+  ten: [20, 35, 22, 16, 21, 32, 30, 29, 22, 12],
 }
 
 class HistogramScreen extends Component {
   static navigationOptions = {
     title: "Charts",
   }
+
+  state = __fakeData__
 
   get id() {
     return this.props.navigation.state.params.id
@@ -42,23 +45,36 @@ class HistogramScreen extends Component {
     return this.props.modules[this.id]
   }
 
+  componentDidMount() {
+    socket.emit("dispatch", {
+      action: "histogram",
+      id: this.id,
+    })
+    socket.on("histogram", data => console.log(data))
+  }
+
   render() {
+    const histogram = this.module.histogram || __fakeData__
+
     const barData = [
       {
-        values: __fakeData__.week,
+        values: histogram.week,
       },
     ]
     return (
       <View>
         <Text style={{...textStyle}}>
-          {texts[this.module.type].unique.replace("{}", __fakeData__.unique)}
+          {texts[this.module.type].unique.replace(
+            "{}",
+            histogram.unique.toFixed(),
+          )}
         </Text>
         <Text style={{...textStyle}}>
           {texts[this.module.type].week}
         </Text>
         <View style={{height: 200, flexDirection: "row", paddingLeft: 5}}>
           <YAxis
-            dataPoints={__fakeData__.week}
+            dataPoints={histogram.week}
             formatLabel={(value, index) => value}
             contentInset={{top: 20, bottom: 20}}
             labelStyle={{color: "grey"}}
@@ -86,7 +102,7 @@ class HistogramScreen extends Component {
         </Text>
         <AreaChart
           style={{height: 200}}
-          dataPoints={__fakeData__.ten}
+          dataPoints={histogram.ten}
           contentInset={{top: 30, bottom: 30}}
           curve={shape.curveNatural}
           svg={{

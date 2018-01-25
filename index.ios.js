@@ -91,6 +91,11 @@ socket.on("dispatch", data => {
         payload: {...module, weight: data.payload},
       })
       break
+    case "histogram":
+      store.dispatch({
+        type: "SET_MODULE",
+        payload: {...module, histogram: data.payload},
+      })
   }
 })
 socket.on("leave", id => {
