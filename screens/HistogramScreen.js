@@ -8,12 +8,12 @@ import socket from "../socket"
 
 const texts = {
   FOOD: {
-    unique: "Votre chat a mangé {} fois aujourd'hui.",
+    unique: "Votre chat a mangé {} g aujourd'hui.",
     week: "Par semaine",
     ten: "Quantité mangée",
   },
   WATER: {
-    unique: "Votre chat a bu {} fois aujourd'hui.",
+    unique: "Votre chat a bu {} cL aujourd'hui.",
     week: "Par semaine",
     ten: "Quantités consommées",
   },
