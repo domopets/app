@@ -56,13 +56,18 @@ export default class LaserControllerScreen extends Component {
 
   componentWillMount() {
     this.socket = io(this.url)
+    console.log(this.url)
     this.setState({angleHori: 90})
     this.setState({angleVert: 90})
     this.moveUp(90)
     this.moveRight(90)
+    this.socket.emit("laserOn")
+    this.socket.emit("sound-start")
   }
 
   componentWillUnmount() {
+    this.socket.emit("laserOff")
+    this.socket.emit("sound-end")
     this.socket.disconnect()
   }
 
@@ -83,25 +88,33 @@ export default class LaserControllerScreen extends Component {
           source={{html: this.formatHtml(), baseUrl: '/'}} />
       <View style={{alignItems: 'center'}}>
       <Icon
+      size={30}
+      iconStyle={{margin:15, marginBottom:5}}
       type='font-awesome'
       name="chevron-up"
       onPress={() => this.moveUp(this.state.angleVert - 10)}
       />
-      <View style={{paddingBottom: 15, paddingTop: 15, flexDirection: 'row'}}>
-      <View style={{paddingRight: 50}}>
+      <View style={{flexDirection: 'row'}}>
+      <View style={{paddingRight: 40}}>
       <Icon
+      size={30}
+      iconStyle={{margin:15}}
       type='font-awesome'
       name="chevron-left"
       onPress={() => this.moveLeft(this.state.angleHori - 10)}
       />
       </View>
       <Icon
+      size={30}
+      iconStyle={{margin:15}}
       type='font-awesome'
       name="chevron-right"
       onPress={() => this.moveRight(this.state.angleHori + 10)}
       />
       </View>
       <Icon
+      size={30}
+      iconStyle={{margin:15, marginTop:5}}
       type='font-awesome'
       name="chevron-down"
       onPress={() => this.moveDown(this.state.angleVert + 10)}
