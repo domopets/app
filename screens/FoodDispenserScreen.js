@@ -108,7 +108,10 @@ class FoodDispenser extends Component {
             backgroundColor="transparent"
             onPress={() => {
               if (this.state.checked) {
-                socket.emit("unschedule")
+                socket.emit("dispatch", {
+                  action: "unschedule",
+                  id: this.id,
+                })
               }
               this.setState({checked: !this.state.checked})
             }}
