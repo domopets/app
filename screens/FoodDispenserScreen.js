@@ -53,7 +53,14 @@ class FoodDispenser extends Component {
   _hideDateTimePicker = () => this.setState({isDateTimePickerVisible: false})
 
   _handleDatePicked = date => {
-    console.log("A date has been picked: ", date)
+    socket.emit("dispatch", {
+      action: "schedule",
+      id: this.id,
+      payload: {
+        h: date.getHours(),
+        m: date.getMinutes(),
+      },
+    })
     this._hideDateTimePicker()
   }
 
@@ -99,7 +106,12 @@ class FoodDispenser extends Component {
               backgroundColor: "transparent",
             }}
             backgroundColor="transparent"
-            onPress={() => this.setState({checked: !this.state.checked})}
+            onPress={() => {
+              if (this.state.checked) {
+                socket.emit("unschedule")
+              }
+              this.setState({checked: !this.state.checked})
+            }}
           />
           <Button
             title="Schedule"
